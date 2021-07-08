@@ -1,0 +1,71 @@
+.spacer{
+    flex: 1 1 auto;
+}
+// mat-toolbar{
+//     background-color: #e7e7e7;
+// }
+.div{
+    border-left: 1px solid #cccccc;
+}
+mat-spinner{
+    margin: auto;
+}
+mat-card-title{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: small;
+}
+.add-button{
+    height: 30px;
+}
+.card{
+    cursor: pointer;
+}
+button{
+    border-radius: 3px;
+}
+.amount-width{
+    width: 100px
+}
+mat-icon{
+    cursor: pointer;
+}
+::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+    min-width: 0!important;
+    padding: 3px!important;
+    margin: 8px!important;
+}
+  table {
+    width: 100%;
+  }
+  td{
+      width: 10%;
+      font-size: 12px;
+  }
+.a{
+    color: #5DADE2;
+}
+.qty span{
+    border: 1px solid #cccccc;
+    padding: 1px 10px;
+    font-size: 12px;
+}
+td{
+    width: 10px;
+}
+// .team-section, .mat-table, mat-card{
+//   background-color: #e7e7e7;
+// }
+.card{
+  height: 130px;
+}
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 40px;
+    border-radius: 20px ;
+    // margin-left: 80px;
+  }
+  .matCard{
+      background-color: #EBF5FB;
+  }
+@import  "~bootstrap/dist/css/bootstrap.min.css";

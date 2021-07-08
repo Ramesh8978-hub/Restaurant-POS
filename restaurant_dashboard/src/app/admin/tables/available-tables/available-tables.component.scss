@@ -1,0 +1,53 @@
+
+img{
+    width: 100px;
+    height: 80px;
+    margin-left: 30px;
+}
+table {
+  width: 100%;
+}
+.card-margin{
+  margin: 2% 2% 2% 2%;
+}
+
+mat-card-title{
+color: white;
+}
+mat-card-subtitle{
+  color: white;
+  }
+  mat-spinner{
+    margin: auto;
+  }
+
+.spacer{
+  flex: 1 1 auto;
+}
+
+.add{
+  margin-left: -5px;
+  font-size: 20px;
+  }
+  .newButton{
+    margin-left: -2.1%;
+    height: 35px;
+    border-radius: 3px;
+  }
+
+.matTable{
+border: 1px solid #E5E7E9;
+}
+
+.image{
+  text-align: center;
+  background-color: white;
+  div{
+      text-align: center;
+      font-size: 30px;
+      color: #CACFD2;
+      font-weight: 400;
+  }
+}
+
+@import  "~bootstrap/dist/css/bootstrap.min.css";

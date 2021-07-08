@@ -1,0 +1,111 @@
+.mat-tab-group {
+    margin-bottom: 48px;
+    //width: 50px;
+  }
+  // .matTable{
+  //   border: 1px solid #E5E7E9;
+  //   margin: 2%;
+  
+  //   }
+ mat-button-toggle.router-link-active{
+    color: white;
+    background-color: #124679;
+  }
+  mat-button-toggle{
+    width: 100%;
+  }
+  mat-button-toggle-group{
+    width: 100%;
+  }
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
+  .card-margin{
+    margin: 2%;
+  }
+    p{
+      text-align: center;
+    }
+    table {
+      width: 100%;
+    }
+    button{
+      border-radius: 30px;
+    }
+    mat-option:last-child:before{
+        content: 'All';
+        float: left;
+        text-transform: none;
+        top: 4px;
+        position: relative;
+    }
+    mat-option:last-child .mat-option-text{
+      display: none;
+      position: relative;
+    }
+    img{
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      border-radius: 5px;
+    }
+  
+.image{
+  text-align: center;
+  background-color: white;
+  img{
+    width: 100px;
+    height: 100px;
+  }
+  div{
+      text-align: center;
+      font-size: 15px;
+      color: #CACFD2;
+      font-weight: 10;
+  }
+}
+  .qty span{
+      border: 1px solid gray;
+      padding: 1px 10px;
+      font-size: 15px;
+  }
+  .newButton{
+    height: 35px;
+    border-radius: 4px;
+    
+  }
+  .spacer{
+    flex: 1 1 auto
+  }
+
+  ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+    min-width: 0!important;
+    margin: 10px!important;
+}
+.mat-table {
+
+  tfoot {
+    display: none;
+  }
+
+  &.footer-visible {
+    tfoot {
+      display: table-footer-group;
+    }
+  }
+}
+.image1{
+  text-align: center;
+  background-color: white;
+  div{
+      text-align: center;
+      font-size: 30px;
+      color: #CACFD2;
+      font-weight: 400;
+  }
+}
+  th{
+    font-weight: bold;
+  }
+
+  @import '~bootstrap/dist/css/bootstrap.min.css';

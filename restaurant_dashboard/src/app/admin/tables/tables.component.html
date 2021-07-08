@@ -1,0 +1,62 @@
+<div class="card-margin">
+  <div class="mat-table matTable mat-elevation-z3">
+    <mat-card class="mat-elevation-z0">
+      <mat-card-header>
+        <button mat-raised-button class="newButton" color="primary" (click)="openDialog()">
+          <mat-icon class="add">add_circle</mat-icon> Add
+        </button>
+
+        <span class="spacer"></span>
+
+        <label class="availible"></label>&nbsp; <span>Available</span> &nbsp;&nbsp;
+        <label class="placed"></label>&nbsp; <span>Placed</span> &nbsp;&nbsp;
+        <label class="served"></label>&nbsp; <span>Served</span> &nbsp;&nbsp;
+        <label class="booked"></label> &nbsp; <span>Booked</span> &nbsp;&nbsp;
+        <label class="not-Availible"></label>&nbsp; <span>Not-Available</span>
+
+
+      </mat-card-header>
+    </mat-card>
+    <div class="container">
+      <section class="team-section text-center my-0">
+        <div class="row">
+          <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+
+          <div class="col-lg-2 col-md-4 col-sm-4 mb-lg-0 mb-5" *ngFor="let table of tables | orderBy:'tableNumber'"><br>
+            <mat-card class="mat-elevation-z0 card"
+              [style.background-color]="tableColor.colors(table.tableStatus.tableStatus)">
+              <mat-card-header>
+                <span class="spacer"></span>
+                <button mat-icon-button class="icon" [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                  <button mat-menu-item (click)="GetTablesData(table.id,table.tableStatus.tableStatus)"
+                   >
+                   <!-- *ngIf="table.tableStatus.tableStatus === 'Available' || table.tableStatus.tableStatus==='Not-Available'" -->
+                    <mat-icon color="primary">create</mat-icon>
+                    <span>Edit</span>
+                  </button>
+                  <button mat-menu-item (click)="DeleteTablesData(table.id,table.tableStatus.tableStatus)">
+                    <mat-icon color="warn">delete</mat-icon>
+                    <span>Delete</span>
+                  </button>
+                </mat-menu>
+              </mat-card-header>
+              <mat-card-title style="font-size: large;" (click)="showTables(table.tableStatus.tableStatus,table.id)">
+                {{table.tableNumber}}</mat-card-title>
+              <mat-card-subtitle (click)="showTables(table.tableStatus.tableStatus,table.id)">
+                Seating:{{table.sittingCapacity}}</mat-card-subtitle>
+            </mat-card>
+          </div>
+        </div>
+        <div class="image" *ngIf="total <= 0">
+          <img src="{{noData.image}}" style="height:150px;width: 150px;">
+          <div>
+            {{noData.noDataFound}}
+          </div>
+        </div><br>
+      </section>
+    </div>
+  </div>
+</div>

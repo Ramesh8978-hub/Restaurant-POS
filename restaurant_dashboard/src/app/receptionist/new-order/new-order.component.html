@@ -1,0 +1,231 @@
+<br>
+  <div class="container-fluid">
+    <mat-card class="mat-elevation-z3 matCard" *ngIf="ordersData.length > 0">
+    <div class="row">
+      <div class="col-sm-7">
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+          <mat-tab-group (selectedTabChange)="categoryData($event)" animationDuration="0ms">
+            <mat-tab label="All">
+              <div class="card-margin">
+                <div class="mat-table">
+                  <div class="container-fluid">
+                    <section class="team-section text-center my-5">
+                      <div class="row" style="background-color: #EBF5FB;">
+                        <div class="col-lg-2 col-md-3 col-sm-3 mb-lg-0 mb-5" *ngFor="let item of items">
+                          <div>
+                            <div class="card" matRipple style="background-color: #EBF5FB;"
+                            (click)="selectedItems(item.id, item.category.id, item.itemName, item.price)">
+                              <img class="card-img-top" [src]="Url + '/' + item.imagepath" height="70px"><br>
+                              <mat-card-title>{{item.itemName}}</mat-card-title>
+                            </div><br>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab *ngFor="let category of data" [label]="category.category">
+              <div class="card-margin">
+                <div class="mat-table">
+                  <div class="container-fluid">
+                    <section class="team-section text-center my-5">
+                      <div class="row" style="background-color: #EBF5FB;">
+                        <div class="col-lg-2 col-md-3 col-sm-3 mb-lg-0 mb-5" *ngFor="let item of items"
+                          (click)="selectedItems(item.id, item.category.id, item.itemName, item.price)">
+                          <div matRipple>
+                            <div class="mat-elevation-z0 card" style="background-color: #EBF5FB;">
+                              <img  class="card-img-top" [src]="Url + '/' + item.imagepath" height="70px"><br>
+                              <mat-card-title>{{item.itemName}}</mat-card-title>
+                            </div><br>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+      </div>
+      <div class="col-sm-5 div">
+        <mat-card-header>
+          <h4>Order Items</h4>
+          <span class="spacer"></span>
+          <h5><b>#{{tableNumber}}</b></h5>
+        </mat-card-header>
+
+        <table mat-table [dataSource]="dataSource" style="background-color: #EBF5FB;">
+          <ng-container matColumnDef="itemName">
+            <th mat-header-cell *matHeaderCellDef> Item </th>
+            <td mat-cell *matCellDef="let k"> {{k.itemName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let item"> {{item.price}} </td>
+          </ng-container>
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let item">
+              <div class="qty btn-group">
+                <button type="button" class="btn btn-sm btn-danger"
+                  (click)="decreaseQty(item.quantity, item.id)">-</button>
+                <span>{{item.quantity}}</span>
+                <button type="button" class="btn btn-sm btn-primary"
+                  (click)="increaseQty(item.quantity, item.id)">+</button>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let item">{{item.description | slice: 0:10}}<span *ngIf="item.description">...</span></td>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let item">
+              <mat-icon color="accent" (click)="addDescription(item.id)">speaker_notes</mat-icon>
+              <mat-icon color="warn" (click)="removeItem(item.id)">clear</mat-icon>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <br>
+        <div *ngIf="comment">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <textarea matInput  [(ngModel)]="description"></textarea>
+          </mat-form-field>&nbsp;
+          <button class="add-button" mat-raised-button (click)="DescriptionSubmit()" color="primary">Add</button>
+        </div>
+        <mat-card-title>
+          <div class="text-right">
+            <h6>Total : <span class="amount-width">₹{{totalAmount}}</span></h6>
+          </div>
+        </mat-card-title>
+        <br><br>
+        <mat-card-header>
+          <span class="spacer"></span>
+          <button mat-mini-fab (click)="removeAllItems()" class="example-button-container" [routerLink]="['/Receptionist/newOrder/']" routerLinkActive="router-link-active" ><mat-icon>clear</mat-icon></button>&nbsp;&nbsp;
+          <button mat-mini-fab color="primary" type="submit" (click)="createOrder()" class="example-button-container"><mat-icon>done</mat-icon></button>
+        </mat-card-header>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="container-fluid" *ngIf="ordersData.length <= 0">
+    <mat-card class="mat-elevation-z3">
+    <div class="row">
+      <div class="col-sm-7">
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+          <mat-tab-group (selectedTabChange)="categoryData($event)" animationDuration="0ms">
+            <mat-tab label="All">
+              <div class="card-margin">
+                <div class="mat-table">
+                  <div class="container-fluid">
+                    <section class="team-section text-center my-5">
+                      <div class="row">
+                        <div class="col-lg-2 col-md-3 col-sm-3 mb-lg-0 mb-5" *ngFor="let item of items">
+                          <div>
+                            <div class="card" matRipple
+                            (click)="selectedItems(item.id, item.category.id, item.itemName, item.price)">
+                              <img class="card-img-top" [src]="Url + '/' + item.imagepath" height="70px"><br>
+                              <mat-card-title>{{item.itemName}}</mat-card-title>
+                            </div><br>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab *ngFor="let category of data" [label]="category.category">
+              <div class="card-margin">
+                <div class="mat-table">
+                  <div class="container-fluid">
+                    <section class="team-section text-center my-5">
+                      <div class="row">
+                        <div class="col-lg-2 col-md-3 col-sm-3 mb-lg-0 mb-5" *ngFor="let item of items"
+                          (click)="selectedItems(item.id, item.category.id, item.itemName, item.price)">
+                          <div matRipple>
+                            <div class="mat-elevation-z0 card">
+                              <img  class="card-img-top" [src]="Url + '/' + item.imagepath" height="70px"><br>
+                              <mat-card-title>{{item.itemName}}</mat-card-title>
+                            </div><br>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+      </div>
+      <div class="col-sm-5 div">
+        <mat-card-header>
+          <h4>Order Items</h4>
+          <span class="spacer"></span>
+          <h5><b>#{{tableNumber}}</b></h5>
+        </mat-card-header>
+
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="itemName">
+            <th mat-header-cell *matHeaderCellDef> Item </th>
+            <td mat-cell *matCellDef="let k"> {{k.itemName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let item"> {{item.price}} </td>
+          </ng-container>
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell *matCellDef="let item">
+              <div class="qty btn-group">
+                <button type="button" class="btn btn-sm btn-danger"
+                  (click)="decreaseQty(item.quantity, item.id)">-</button>
+                <span>{{item.quantity}}</span>
+                <button type="button" class="btn btn-sm btn-primary"
+                  (click)="increaseQty(item.quantity, item.id)">+</button>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let item">{{item.description | slice: 0:10}}<span *ngIf="item.description">...</span></td>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let item">
+              <mat-icon color="accent" (click)="addDescription(item.id)">speaker_notes</mat-icon>
+              <mat-icon color="warn" (click)="removeItem(item.id)">clear</mat-icon>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <br>
+        <div *ngIf="comment">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <textarea matInput  [(ngModel)]="description"></textarea>
+          </mat-form-field>&nbsp;
+          <button class="add-button" mat-raised-button (click)="DescriptionSubmit()" color="primary">Add</button>
+        </div>
+        <mat-card-title>
+          <div class="text-right">
+            <h6>Total : <span class="amount-width">₹{{totalAmount}}</span></h6>
+          </div>
+        </mat-card-title>
+        <br>
+        <mat-card-header>
+          <span class="spacer"></span>
+          <button mat-mini-fab (click)="removeAllItems()" class="example-button-container" [routerLink]="['/Receptionist/newOrder/']" routerLinkActive="router-link-active" ><mat-icon>clear</mat-icon></button>&nbsp;&nbsp;
+          <button mat-mini-fab color="primary" type="submit" (click)="createOrder()" class="example-button-container"><mat-icon>done</mat-icon></button>
+        </mat-card-header>
+      </div>
+    </div>
+  </mat-card>
+  </div>

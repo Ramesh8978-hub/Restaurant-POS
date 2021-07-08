@@ -1,0 +1,234 @@
+<div class="div">
+  <div class="card-margin">
+    <div class="grid-container">
+      <div class="mat-table matTable">
+        <mat-card class="card-size">
+          <div class="team-section text-center my-0">
+            <div class="row">
+              <div class="col-lg-2 col-md-6 col-sm-4 mb-lg-0 mb-5">
+                <mat-card class="mat-elevation-z5 card" style="background-color:#F86774"
+                  [routerLink]="['/admin/category']" routerLinkActive="router-link-active">
+                  <mat-card-title>
+                    <mat-icon>category</mat-icon> <br> Categories
+                  </mat-card-title><br>
+                  <mat-card-subtitle>{{categoriesCount}}</mat-card-subtitle>
+                </mat-card>
+              </div>
+              <div class="col-lg-2 col-md-6 col-sm-4 mb-lg-0 mb-5">
+                <mat-card class="mat-elevation-z5 card" style="background-color:#78A4F6 "
+                  [routerLink]="['/admin/items']" routerLinkActive="router-link-active">
+                  <mat-card-title>
+                    <mat-icon>lunch_dining</mat-icon><br>Items
+                  </mat-card-title><br>
+                  <mat-card-subtitle>{{itemsCount}}</mat-card-subtitle>
+                </mat-card>
+              </div>
+              <div class="col-lg-2 col-md-6 col-sm-4 mb-lg-0 mb-5">
+                <mat-card class="mat-elevation-z5 card" style="background-color:#d3b614   "
+                  [routerLink]="['/admin/orders']" routerLinkActive="router-link-active">
+                  <mat-card-title>
+                    <mat-icon>menu_book</mat-icon><br>Orders
+                  </mat-card-title><br>
+                  <mat-card-subtitle>{{ordersCount}}</mat-card-subtitle>
+                </mat-card>
+              </div>
+
+              <div class="col-lg-2 col-md-6 col-sm-6 mb-lg-0 mb-5">
+                <mat-card class="mat-elevation-z5 card" style="background-color:#7DB9E3 "
+                  [routerLink]="['/admin/tables/available-tables']" routerLinkActive="router-link-active">
+                  <mat-card-title>
+                    <mat-icon>restaurant_menu</mat-icon><br>Available Tables
+                  </mat-card-title>
+                  <mat-card-subtitle>{{tableCount}}</mat-card-subtitle>
+                </mat-card>
+              </div>
+              <div class="col-lg-2 col-md-6 col-sm-6 mb-lg-0 mb-5">
+                <mat-card class="mat-elevation-z5 card" style="background-color:#F173AC"
+                  [routerLink]="['/admin/employees/available-waiters']" routerLinkActive="router-link-active">
+                  <mat-card-title>
+                    <mat-icon>people</mat-icon><br>Available Waiters
+                  </mat-card-title>
+                  <mat-card-subtitle>{{waiterCount}}</mat-card-subtitle>
+                </mat-card>
+              </div>
+              <div class="col-lg-2 col-md-6 col-sm-4 mb-lg-0 mb-5">
+                <mat-card class="mat-elevation-z5 card" style="background-color:#8DEFF9 " [routerLink]="['/admin/']"
+                  routerLinkActive="router-link-active">
+                  <mat-card-title>
+                    <mat-icon>menu_book</mat-icon><br>Today Orders
+                  </mat-card-title><br>
+                  <mat-card-subtitle>{{CompletedOrdersCount}}</mat-card-subtitle>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+    <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle (click)="todayReports()" checked>Today</mat-button-toggle>
+      <mat-button-toggle (click)="monthlyReports()">Month</mat-button-toggle>
+      <mat-button-toggle (click)="yearlyReports()">Year</mat-button-toggle>
+      <mat-button-toggle (click)="allReports()">All</mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-grid-list cols="2" rowHeight="430px">
+      <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card mat-elevation-z4">
+          <mat-card-header>
+            <mat-card-title class="chart-card-title">
+              Items Quantity
+            </mat-card-title>
+          </mat-card-header>
+          <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+          <mat-card-content class="dashboard-card-content">
+            <div>
+            <div>
+              <div style="display: block">
+                <canvas baseChart
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile  *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card mat-elevation-z4">
+          <mat-card-header>
+            <mat-card-title class="chart-card-title">
+              Items Quantity
+            </mat-card-title>
+            <span class="spacer"></span>
+            <button mat-button mat-raised-button (click)="pieChartLegend=!pieChartLegend">Toggle</button>
+          </mat-card-header>
+          <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+          <mat-card-content class="dashboard-card-content"><div>
+            <div>
+              <div class="chart">
+                <canvas baseChart
+                  [data]="pieChartData"
+                  [labels]="pieChartLabels"
+                  [chartType]="pieChartType"
+                  [colors]="pieChartColors"
+                  [options]="pieChartOptions"
+                  [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div> 
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card mat-elevation-z4">
+          <mat-card-header>
+            <mat-card-title class="chart-card-title">
+              Revenue of Items
+            </mat-card-title>
+          </mat-card-header>
+          <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+          <mat-card-content class="dashboard-card-content">
+            <div>
+            <div>
+              <div style="display: block">
+                <canvas baseChart
+                  [datasets]="barChart2Data"
+                  [labels]="barChart2Labels"
+                  [options]="barChart2Options"
+                  [legend]="barChart2Legend"
+                  [chartType]="barChart2Type">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile  *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card mat-elevation-z4">
+          <mat-card-header>
+            <mat-card-title class="chart-card-title">
+              Revenue of Items
+            </mat-card-title>
+            <span class="spacer"></span>
+            <button mat-button mat-raised-button (click)="pieChart2Legend=!pieChart2Legend">Toggle</button>
+          </mat-card-header>
+          <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+          <mat-card-content class="dashboard-card-content"><div>
+            <div>
+              <div class="chart">
+                <canvas baseChart
+                  [data]="pieChart2Data"
+                  [labels]="pieChart2Labels"
+                  [chartType]="pieChart2Type"
+                  [colors]="pieChart2Colors"
+                  [options]="pieChart2Options"
+                  [legend]="pieChart2Legend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card mat-elevation-z4">
+          <mat-card-header>
+            <mat-card-title class="chart-card-title">
+              Income and Expenses
+            </mat-card-title>
+          </mat-card-header>
+          <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+          <mat-card-content class="dashboard-card-content">
+            <div>
+            <div>
+              <div style="display: block">
+                <canvas baseChart
+                  [datasets]="barChart3Data"
+                  [labels]="barChart3Labels"
+                  [options]="barChart3Options"
+                  [legend]="barChart3Legend"
+                  [chartType]="barChart3Type">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile  *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card mat-elevation-z4">
+          <mat-card-header>
+            <mat-card-title class="chart-card-title">
+              Income and Expenses
+            </mat-card-title>
+            <span class="spacer"></span>
+            <button mat-button mat-raised-button (click)="pieChart3Legend=!pieChart3Legend">Toggle</button>
+          </mat-card-header>
+          <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+          <mat-card-content class="dashboard-card-content"><div>
+            <div>
+              <div class="chart">
+                <canvas baseChart
+                  [data]="pieChart3Data"
+                  [labels]="pieChart3Labels"
+                  [chartType]="pieChart3Type"
+                  [colors]="pieChart3Colors"
+                  [options]="pieChart3Options"
+                  [legend]="pieChart3Legend">
+                </canvas>
+              </div>
+            </div>
+          </div> 
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+</div>

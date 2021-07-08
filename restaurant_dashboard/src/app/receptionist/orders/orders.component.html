@@ -1,0 +1,115 @@
+<mat-card class="card-margin mat-elevation-z0">
+    <div  *ngIf="total1 > 0">
+        <mat-button-toggle-group>
+            <mat-button-toggle *ngFor="let order of orderStatus" (click)="getOrderedItems(order.id)" [value]="order.id"
+                [routerLink]="['/Receptionist/orders/'+ order.id ]" routerLinkActive="router-link-active">
+                {{order.tableNumber}}</mat-button-toggle>
+        </mat-button-toggle-group>
+        <div class="matTable">
+            <mat-card class="mat-elevation-z0">
+                <mat-card-header>
+                    Waiter Name : <b style="color: #15547F;" class="h6"> &nbsp;&nbsp; {{orderWaiterId}}</b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Order Status : <b style="color: crimson" class="h6"> &nbsp;&nbsp; {{orderStatusdata}}</b>
+                    <span class="spacer"></span>
+                    <button mat-raised-button class="newButton" color="primary"
+                        [routerLink]="['/Receptionist/newOrder/'+ ordersId]">
+                        <mat-icon class="add">add_circle</mat-icon> Add
+                    </button>
+                </mat-card-header>
+    
+            </mat-card>
+            <table mat-table [dataSource]="orderItems" matSort>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>S.No</th>
+                    <td mat-cell *matCellDef="let order">{{orderItems.filteredData.indexOf(order)+1}} </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="image">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Image </th>
+                    <td mat-cell *matCellDef="let data">
+                        <img class="image" [src]="Url+ '/'+data.imagepath">
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+                    <td mat-cell *matCellDef="let orders"> {{orders.category.category}} </td>
+                    <td mat-footer-cell *matFooterCellDef>Total</td>
+                </ng-container>
+                <ng-container matColumnDef="kitchenStatus">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Kitchen Status </th>
+                    <td mat-cell *matCellDef="let orders"> {{orders.kitchenStatus.kitchenStatus}} </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="itemName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Item </th>
+                    <td mat-cell *matCellDef="let orders"> {{orders.itemName}} </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+                    <td mat-cell *matCellDef="let orders"> {{orders.price}} </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+                    <td mat-cell *matCellDef="let orders">
+                        <div class="qty btn-group">
+                            <button type="button" class="btn btn-sm btn-danger" (click)="decreaseQty(orders)">-</button>
+                            <span>{{orders.quantity}}</span>
+                            <button type="button" class="btn btn-sm btn-primary" (click)="increaseQty(orders)">+</button>
+                        </div>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                    <td mat-cell *matCellDef="let orders"> {{orders.price * orders.quantity}} </td>
+                    <td mat-footer-cell *matFooterCellDef> {{TotalCost | currency: 'INR'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                    <td mat-cell *matCellDef="let orders">
+                        <button mat-icon-button color="warn"
+                            (click)="deleteItemData(orders.id, orders.order.orderStatus.orderStatus)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <div *ngIf="isLoading">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+            </table>
+            <div class="image" *ngIf="total <= 0">
+                <img src="../../../assets/no_data_found.png">
+                <div>
+                    No Data Found
+                </div>
+            </div>
+            <mat-card class="mat-elevation-z0">
+                <mat-card-header>
+                    <span class="spacer"></span>
+                    <button mat-raised-button class="newButton" color="accent" (click)="totalOrders()" *ngIf="div1">
+                        Bill
+                    </button>
+                    <button mat-raised-button class="newButton" color="accent" (click)="updateOrderStatus()" *ngIf="served">
+                        OrderFinish
+                    </button>
+                </mat-card-header>
+            </mat-card>
+    
+        </div>
+    </div>
+    <div class="image1" *ngIf="total1 <= 0">
+        <img src="{{noData.image}}" style="height:150px;width: 150px;">
+        <div>
+            {{noData.noDataFound}}
+        </div>
+    </div> 
+</mat-card>
+

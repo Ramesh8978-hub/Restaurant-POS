@@ -1,0 +1,53 @@
+body {
+    background: #eee
+}
+.spacer{
+    flex: 1 1 auto
+  }
+  
+table {
+  width: 100%;
+}
+
+td{
+  width: 10px;
+}
+
+.card-margin{
+  margin: 2% 2% 2% 2%;
+}
+
+mat-toolbar{
+  background-color: white;
+}
+p{
+  text-align: center;
+}
+.spacer{
+  flex: 1 1 auto;
+}
+
+.view{  
+cursor: pointer;
+margin: 2px;
+border: 1px solid rgb(231, 230, 230);
+padding: 5px;
+border-radius: 5px;
+}
+
+.add{
+margin-left: -5px;
+font-size: 20px;
+}
+.newButton{
+  margin-left: -2.1%;
+  height: 35px;
+}
+.exportButton{
+  height: 35px;
+}
+.image{
+  height: 80px;
+  width: 80px;
+}
+@import '~bootstrap/dist/css/bootstrap.min.css';

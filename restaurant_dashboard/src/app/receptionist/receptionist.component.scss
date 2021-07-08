@@ -1,0 +1,18 @@
+td{
+  width: 10px;
+}
+
+app-invoice {
+  display: none;
+}
+
+@media print {
+
+    app-invoice {
+      display: block;
+    }
+
+    app-receptionist-nav {
+      display: none;
+    }
+  }

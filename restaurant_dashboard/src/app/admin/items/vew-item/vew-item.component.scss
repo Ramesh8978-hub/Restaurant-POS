@@ -1,0 +1,26 @@
+div{
+    width: 35%;
+    margin: auto;
+}
+img{
+    height: 300px;
+}
+mat-card-content{
+    margin: 5%;
+}
+.spacer{
+    flex: 1 1 auto;
+}
+mat-toolbar{
+    background-color: white;
+}
+mat-card-content{
+    margin-top: 10px;
+}
+mat-card-subtitle{
+    text-align: justify;
+    text-justify: inter-word;
+}
+button{
+    width: 100%;
+}

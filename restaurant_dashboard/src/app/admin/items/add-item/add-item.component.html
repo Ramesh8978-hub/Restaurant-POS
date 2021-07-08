@@ -1,0 +1,73 @@
+<div class="div mat-elevation-z3">
+    <mat-card class="dashboard-card mat-elevation-z0">
+        <form action="" [formGroup]="itemForm" *ngIf="itemForm" (ngSubmit)="onSubmit()">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Category</mat-label>
+                            <mat-select formControlName="categoryId">
+                                <mat-option *ngFor="let category of categoryData" [value]="category.id">
+                                    {{category.category}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Item</mat-label>
+                            <input matInput formControlName="itemName" (keypress)="keyPressAlphaNumeric($event)">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Price</mat-label>
+                            <input matInput type="text" formControlName="price" (keypress)="keyPressNumeric($event)" maxlength="5" minlength="1">
+                              <mat-error *ngIf="!itemForm.get('price').hasError('minlength')">
+                                price atleast 1 numbers.
+                              </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Priority</mat-label>
+                            <input matInput type="number" formControlName="priority">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-3"  *ngIf="!showImage">
+                        <button type="button" class="button" mat-raised-button (click)="filePicker.click()">
+                            <mat-icon>image</mat-icon> Select Image
+                        </button>
+                        <input type="file" #filePicker (change)="onFileSelected($event)">
+                        <br>
+                        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
+                            <img [src]="imagePreview">
+                        </div>
+                    </div>
+                    <div class="col-sm-3"  *ngIf="showImage">
+                        <h3 style="text-align: center;">Item Image</h3>
+                        <div class="image-show" *ngIf="imagePath">
+                            <img [src]="Url+ '/'+ imagePath">
+                        </div>
+                    </div>
+                    <div class="col-sm-3" *ngIf="showImage">
+                        <button type="button" class="button" mat-raised-button (click)="filePicker.click()">
+                            <mat-icon>image</mat-icon> Select New Image
+                        </button>
+                        <input type="file" #filePicker (change)="onFileSelected($event)">
+                        <br>
+                        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
+                            <img [src]="imagePreview">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <br>
+                        <span class="button"></span>
+                        <button type="button" mat-raised-button [routerLink]="['/admin/items']"
+                            routerLinkActive="router-link-active" color="warn">Cancel</button>&nbsp;&nbsp;
+                        <button mat-raised-button color="warn" color="accent" type="reset" *ngIf="!id">Clear</button>&nbsp;&nbsp;
+                        <button mat-raised-button color="primary" type="submit">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+</div>

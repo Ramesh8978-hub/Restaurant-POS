@@ -1,0 +1,101 @@
+<div class="div">
+  <mat-card class="mat-elevation-z3">
+    <form action="" [formGroup]="usersForm" (ngSubmit)="Users()">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-8">
+            <mat-form-field appearance="outline">
+              <mat-label>Role</mat-label>
+              <mat-select formControlName="roleId">
+                <mat-option *ngFor="let Role of roles" [value]="Role.id">{{Role.role}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>User Name</mat-label>
+              <input matInput formControlName="username" (keypress)="keyPressAlphaNumeric($event)"
+                placeholder="User Name" type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" (keypress)="keyPressAlphaNumeric($event)"
+                placeholder="First Name" type="text">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" (keypress)="keyPressAlphaNumeric($event)"
+                placeholder="Last Name" type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput formControlName="mobileNo" type="text" (keypress)="keyPressNumeric($event)" maxlength="10"
+                placeholder="Mobile Number">
+
+              <mat-error
+                *ngIf="!usersForm.get('mobileNo').hasError('required') &&usersForm.get('mobileNo').hasError('pattern')">
+                Please enter valid Mobilenumber
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>EmailId</mat-label>
+              <input matInput formControlName="email" placeholder="EmailId" type="email" >
+
+              <mat-error
+                *ngIf="!usersForm.get('email').hasError('required') &&usersForm.get('email').hasError('pattern')">
+                Please enter valid EmailId
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Age</mat-label>
+              <input matInput formControlName="age" placeholder="Age" type="text" (keypress)="keyPressNumeric($event)" maxlength="3" minlength="1">
+              <mat-error *ngIf="!usersForm.get('age').hasError('minlength')">
+                Age must be 1 numbers.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Aadhar Number</mat-label>
+              <input matInput formControlName="aadharNo" type="text" placeholder="Aadhar Number" maxlength="12" minlength="12"
+                (keypress)="keyPressNumeric($event)">
+              <mat-error *ngIf="!usersForm.get('aadharNo').hasError('minlength')">
+                Aadhar Number must be 12 numbers .
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Address</mat-label>
+              <textarea matInput formControlName="address" placeholder="Address" (keypress)="keyPressAlpha($event)"
+                rows="2"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4"><br>
+            <button type="button"  *ngIf="!showImage" class="button image-upload-button" mat-raised-button (click)="filePicker.click()">
+              <mat-icon>image</mat-icon> Select Image
+            </button>
+            <button type="button" *ngIf="showImage" class="button image-upload-button" mat-raised-button (click)="filePicker.click()">
+              <mat-icon>image</mat-icon> Select New Image
+            </button>
+            <input type="file" #filePicker (change)="onFileSelected($event)">
+            <div class="image-show" *ngIf="imagePath">
+              <img [src]="Url+ '/'+ imagePath"   *ngIf="showImage">
+            </div>
+            <br>
+            <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
+              <img [src]="imagePreview">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <br>
+            <span class="button"></span>
+            <button type="button" mat-raised-button [routerLink]="['/admin/employees']"
+              routerLinkActive="router-link-active" color="warn">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button type="reset" color="accent" *ngIf="!id">Clear</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" mat-raised-button color="primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

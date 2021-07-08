@@ -1,0 +1,73 @@
+
+<div class="card-margin mat-elevation-z3">
+  <div class="mat-table matTable">
+    <mat-card class="mat-elevation-z0">
+      <mat-card-header>
+        <button mat-raised-button class="newButton" color="primary" (click)="openDialog()">
+          <mat-icon class="add">add_circle</mat-icon> Add<span class="spacer"></span>
+        </button><span class="spacer"></span>
+        <mat-form-field>
+          <mat-label>Search</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="">
+          <button matSuffix mat-icon-button>
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-card-header>
+    </mat-card>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>S.No</th>
+        <td mat-cell *matCellDef="let feedback"> {{dataSource.filteredData.indexOf(feedback)+1}} </td>
+      </ng-container>
+      <ng-container matColumnDef="question">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Question</th>
+        <td mat-cell *matCellDef="let feedback"> {{feedback.question}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let feedback">
+          <mat-slide-toggle matTooltipPosition="left" (click)="changeStatus(feedback.id, feedback.status)"
+            [checked]="feedback.status === true" class="primary">
+          </mat-slide-toggle>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CreatedBy </th>
+        <td mat-cell *matCellDef="let feedback"> {{feedback.createdBy.username}} </td>
+      </ng-container>
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> CreatedAt </th>
+        <td mat-cell *matCellDef="let feedback"> {{feedback.createdAt | date}} </td>
+      </ng-container>
+     
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+        <td mat-cell *matCellDef="let feedback" class="action-link">
+          <mat-icon class="view" color="primary" matTooltip="View" (click)="UpdateFeedBackService(feedback.id)">
+            mode</mat-icon>
+          <mat-icon class="view" color="warn" matTooltip="Delete" (click)="DeleteFeedBackService(feedback.id)">
+            delete</mat-icon>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let category; columns: displayedColumns;">
+      </tr>
+    </table>
+    <div *ngIf="isLoading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div class="image" *ngIf="total <= 0">
+      <img src="{{noData.image}}" style="height: 150px;width: 150px;">
+      <div>
+        {{noData.noDataFound}}
+      </div>
+    </div>
+    <mat-paginator #paginator [length]="total" [showFirstLastButtons]="true" [pageSize]="pageSize"
+    [pageSizeOptions]="totalLength" >
+    </mat-paginator>
+  </div>
+</div>

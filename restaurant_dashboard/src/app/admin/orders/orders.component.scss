@@ -1,0 +1,63 @@
+table {
+    width: 100%;
+  }
+
+  td{
+    width: 10px;
+  }
+
+  .card-margin{
+    margin: 2% 2% 2% 2%;
+  }
+
+  mat-toolbar{
+    background-color: white;
+  }
+  p{
+    text-align: center;
+  }
+  .spacer{
+    flex: 1 1 auto;
+  }
+  
+.view{  
+  cursor: pointer;
+  margin: 2px;
+  border: 1px solid rgb(231, 230, 230);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.add{
+  margin-left: -5px;
+  font-size: 20px;
+}
+.newButton{
+    height: 40px;
+    margin: 3px;
+    border-radius: 4px;
+}
+.exportButton{
+    height: 35px;
+}
+.matTable{
+border: 1px solid #E5E7E9;
+}
+.image{
+  text-align: center;
+  background-color: white;
+  div{
+      text-align: center;
+      font-size: 30px;
+      color: #CACFD2;
+      font-weight: 400;
+  }
+}
+.orderStatus{
+  font-size: 12px;
+}
+th{
+  font-weight: bold
+}
+
+@import  "~bootstrap/dist/css/bootstrap.min.css";

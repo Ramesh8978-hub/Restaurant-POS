@@ -1,0 +1,46 @@
+.div{
+    margin:3% 3% 3% 3%;
+}
+mat-form-field{
+    width: 40%;
+    margin: 0 4% 0 4%;
+}
+.form-field{
+  width: 88%;
+  margin: 0 4% 0 4%;
+}
+textarea{
+    height: 15px;
+}
+.button{
+    margin-left: 4%;
+}
+
+input[type="file"]{
+    visibility: hidden;
+}
+.image-preview img{
+  height: 170px;
+  object-fit: fill;
+  width: 250px;
+  margin-left: 14%;
+  border-radius: 10px;
+}
+.image-show img{
+  height: 170px;
+  object-fit: fill;
+  width: 250px;
+  margin-left: 14%;
+  border-radius: 10px;
+}
+textarea{
+  height: 100px;
+}
+button{
+  height: 35px;
+  border-radius: 3px;
+}
+.image-upload-button{
+width: 90%
+}
+@import "~bootstrap/dist/css/bootstrap.min.css";

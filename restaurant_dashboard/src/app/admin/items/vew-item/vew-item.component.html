@@ -1,0 +1,13 @@
+<div><br><br>
+    <mat-card class="mat-elevation-z3 card">
+        <img mat-card-image [src]="Url+ '/'+imagepath" alt="Item image">
+        <mat-toolbar>
+            {{itemName}}
+            <span class="spacer"></span>
+            <span>₹{{price}}.00</span>
+        </mat-toolbar>
+        <mat-card-content>
+            Priority: {{priority}}
+        </mat-card-content>
+    </mat-card>
+</div>

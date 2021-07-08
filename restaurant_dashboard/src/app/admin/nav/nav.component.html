@@ -1,0 +1,145 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>
+      Dashboard
+      <span class="spacer"></span>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/admin']" routerLinkActive="router-link-active"
+        [routerLinkActiveOptions]="{exact: true}">
+        &nbsp;&nbsp;<mat-icon>home</mat-icon>&nbsp;&nbsp; Overview</a>
+      <a mat-list-item [routerLink]="['/admin/category']" routerLinkActive="router-link-active">
+        &nbsp;&nbsp;<mat-icon>category</mat-icon>&nbsp;&nbsp; Category</a>
+      <a mat-list-item [routerLink]="['/admin/items']" routerLinkActive="router-link-active">
+        &nbsp;&nbsp;<mat-icon>lunch_dining</mat-icon>&nbsp;&nbsp; Menu</a>
+      <a mat-list-item [routerLink]="['/admin/tables']" routerLinkActive="router-link-active">
+        &nbsp;&nbsp;<mat-icon>dining</mat-icon>&nbsp;&nbsp; Tables</a>
+      <a mat-list-item [routerLink]="['/admin/employees']" routerLinkActive="router-link-active">
+        &nbsp;&nbsp;<mat-icon>people</mat-icon>&nbsp;&nbsp; Employees</a>
+      <a mat-list-item [routerLink]="['/admin/expenses']" routerLinkActive="router-link-active">
+        &nbsp;&nbsp;<mat-icon>payments</mat-icon>&nbsp;&nbsp; Expenses</a>
+      <a mat-list-item [routerLink]="['/admin/feedback']" routerLinkActive="router-link-active">
+        &nbsp;&nbsp;<mat-icon>question_answer</mat-icon>&nbsp;&nbsp; Feedback</a>
+    </mat-nav-list>
+    <mat-accordion class="app-nav-accordion">
+      <mat-expansion-panel class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>menu_book</mat-icon>
+            <div>&nbsp;&nbsp;&nbsp;Orders</div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/orders/kitchen']"
+            routerLinkActive="router-link-active">
+            Kitchen Orders
+          </a>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/orders/waiter']"
+            routerLinkActive="router-link-active">
+            Waiter Orders
+          </a>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/orders/tables']"
+            routerLinkActive="router-link-active">
+            Table Orders
+          </a>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/orders']" [routerLinkActiveOptions]="{exact: true}"
+            routerLinkActive="router-link-active">
+            Total Orders
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion class="app-nav-accordion">
+      <mat-expansion-panel class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>settings</mat-icon>
+            <div>&nbsp;&nbsp;&nbsp;Settings</div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/expenses-type']"
+            routerLinkActive="router-link-active">
+            ExpensesType
+          </a>
+         
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/user-status']"
+            routerLinkActive="router-link-active">
+            User Status
+          </a>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/table-status']"
+            routerLinkActive="router-link-active">
+            Table Status
+          </a>
+          <a mat-list-item [routerLink]="['/admin/kitchen-status']" routerLinkActive="router-link-active">
+            Kitchen Status
+          </a>
+          <a mat-list-item [routerLink]="['/admin/orders-status']" routerLinkActive="router-link-active">
+            Orders Status
+          </a>
+          <a mat-list-item [routerLink]="['/admin/payment-mode']" routerLinkActive="router-link-active">
+            Payments Mode
+          </a>
+          <a mat-list-item [routerLink]="['/admin/feedback-services']" routerLinkActive="router-link-active">
+            FeedBack Services
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion class="app-nav-accordion">
+      <mat-expansion-panel class="mat-elevation-z0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>report</mat-icon>
+            <div>&nbsp;&nbsp;&nbsp;Reports</div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/order-report']" routerLinkActive="router-link-active">
+            Order Reports
+          </a>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/item-report']" routerLinkActive="router-link-active">
+            Item Reports
+          </a>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/category-report']" routerLinkActive="router-link-active">
+            Category Reports
+          </a> 
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/table-report']" routerLinkActive="router-link-active">
+            Table Reports
+          </a>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/waiter-report']" routerLinkActive="router-link-active">
+            Waiter Reports
+          </a>
+          <a class="fontSmall" mat-list-item [routerLink]="['/admin/expense-report']" routerLinkActive="router-link-active">
+            Expenses Reports
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="mat-elevation-z2">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button *ngIf="drawer.opened === false"
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>CMS</span>
+      <span class="spacer"></span>
+      <span class="lastLogin"> Last Login <br>{{ lastLogin | date: 'short' }}</span>
+      <img [src]="Url+ '/'+ image" mat-card-avatar class="example-header-image" [matMenuTriggerFor]="menu">
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/admin/profile']" routerLinkActive="router-link-active">
+          <mat-icon>person</mat-icon>&nbsp;Profile
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>&nbsp;Logout
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,23 @@
+<div class="card-margin mat-elevation-z3">
+  <div class="mat-table matTable">
+      <div class="container-fluid">
+        <section class="team-section text-center my-3">
+          <div class="row">
+            <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+            <div class="col-lg-2 col-md-4 col-sm-4 mb-lg-0 mb-5" *ngFor="let table of tables">
+              <mat-card class="mat-elevation-z0 card" [style.background-color]="tableColor.colors(table.tableStatus.tableStatus)">
+                <mat-card-title class="h4">{{table.tableNumber}}</mat-card-title>
+                <mat-card-subtitle>Seating : {{table.sittingCapacity}}</mat-card-subtitle>
+              </mat-card><br>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="image" *ngIf="total <= 0">
+      <img src="{{noData.image}}" style="height:150px;width: 150px;">
+      <div>
+        {{noData.noDataFound}}
+      </div>
+    </div>
+  </div>

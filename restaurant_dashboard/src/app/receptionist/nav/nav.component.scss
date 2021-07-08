@@ -1,0 +1,86 @@
+.sidenav-container {
+  height: 100%;
+}
+// mat-card-header{
+//   margin-left: 100px;
+// }
+// .example-header-image {
+//   background-image: url('../../../assets/logo.jpg');
+//   background-size: cover;
+// }
+img{
+  margin-left: 40px;
+  width: 100px;
+}
+.sidenav {
+  width: 250px;
+}
+mat-sidenav{
+  mat-toolbar{
+    color: #124679;
+  }
+}
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+mat-icon{
+  cursor: pointer;
+}
+.menubar{
+  background-color: #3f51b5;
+  color: white;
+}
+.spacer{
+  flex: 1 1 auto;
+}
+.fontSmall{
+  font-size: 15px;
+}
+mat-nav-list a.router-link-active{
+  color: white;
+  background-color: #124679;
+}
+.example-header-image {
+  margin-left: -10px;
+  background-size: cover;
+  cursor: pointer;
+  height: 50px; 
+  width: 50px;
+  border-radius: 50px;
+}
+mat-toolbar{
+  background-color: white;
+}
+.settingsicon{
+  margin-left:-3px ;
+}
+.lastLogin{
+  font-size: 13px;
+  margin-top: 10px;
+  margin-right: 30px;
+  text-align: center;
+}
+.active{
+  color: #124679;
+}
+.my-class{
+  width: 100%;
+  height: 9%;
+}
+
+
+::ng-deep .mat-menu-content {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.mat-menu-item{
+  line-height:40px;
+  height:40px;
+}

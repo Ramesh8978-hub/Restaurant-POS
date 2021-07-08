@@ -1,0 +1,105 @@
+
+<div class="container">
+  <mat-card  class="mat-elevation-z3">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-sm-4">
+        <mat-card class="card-margin mat-elevation-z1">
+          <mat-card-content>
+            <div class="d-flex flex-column align-items-center text-center">
+              <img [src]="Url + '/' + imagePath" mat-card-avatar *ngIf="!imagePreview" (click)="filePicker.click()">
+              <input type="file" #filePicker (change)="onFileSelected($event)">
+              <div *ngIf="imagePreview !== '' && imagePreview">
+                <img [src]="imagePreview" [alt]="usersForm.value.image"  mat-card-avatar (click)="filePicker.click()">
+              </div>
+              <div class="mt-3">
+                <h4>{{firstName}}&nbsp;&nbsp;{{lastName}}</h4>
+                <p class="text-secondary mb-1">{{role}}</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-sm-8">
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="Edit Profile">
+            <br><br>
+            <form [formGroup]="usersForm" (ngSubmit)="Users()">
+                  <mat-form-field appearance="outline">
+                    <mat-label>User Name</mat-label>
+                    <input matInput formControlName="username" placeholder="User Name" (keypress)="keyPressAlphaNumeric($event)" type="text">
+                  </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>First Name</mat-label>
+                      <input matInput formControlName="firstName" (keypress)="keyPressAlphaNumeric($event)" placeholder="First Name" type="text">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Last Name</mat-label>
+                      <input matInput formControlName="lastName" (keypress)="keyPressAlphaNumeric($event)" placeholder="Last Name" type="text">
+                    </mat-form-field>
+      
+                  <mat-form-field appearance="outline">
+                    <mat-label>Mobile Number</mat-label>
+                    <input matInput formControlName="mobileNo" placeholder="Mobile Number" pattern="^[6-9][0-9]{9}$" maxlength="10" >
+      
+                    <mat-error *ngIf="!usersForm.get('mobileNo').hasError('required') &&usersForm.get('mobileNo').hasError('pattern') &&usersForm.get('mobileNo').hasError('maxlength')">
+                      Please enter valid Mobilenumber
+                    </mat-error>
+                  </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>EmailId</mat-label>
+                      <input matInput formControlName="email" placeholder="EmailId" type="email" >
+      
+                      <mat-error *ngIf="!usersForm.get('email').hasError('required') &&usersForm.get('email').hasError('pattern')">
+                        Please enter valid EmailId
+                      </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Age</mat-label>
+                      <input matInput formControlName="age" placeholder="Age" type="text"  maxlength="3" minlength="1" (keypress)="keyPressNumeric($event)">
+                      <mat-error *ngIf="!usersForm.get('age').hasError('minlength')">
+                       age atleast 1 numbers
+                      </mat-error>
+                    </mat-form-field>
+      
+                    <mat-form-field appearance="outline">
+                      <mat-label>Aadhar Number</mat-label>
+                      <input matInput type="text" formControlName="aadharNo" maxlength="12" minlength="12" placeholder="Aadhar Number" (keypress)="keyPressNumeric($event)">
+                      <mat-error *ngIf="!usersForm.get('aadharNo').hasError('minlength')">
+                        Aadhar Number must be 12 numbers .
+                      </mat-error>
+                    </mat-form-field>
+      
+                    <mat-form-field appearance="outline">
+                      <mat-label>Address</mat-label>
+                      <textarea matInput formControlName="address" placeholder="Address" (keypress)="keyPressAlpha($event)"></textarea>
+                    </mat-form-field>
+                    <br>
+                    <span class="button"></span>
+                     <button type="submit" mat-raised-button color="primary">Save</button>
+            </form>
+          </mat-tab>
+          <mat-tab label="Change Password">
+            <br><br>
+              <form [formGroup]="changePasswordForm">
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Old Password</mat-label>
+                      <input matInput formControlName="password" placeholder="Old password" (keypress)="keyPressNumericAlpha($event)">
+                  </mat-form-field><br>
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>New Password</mat-label>
+                      <input matInput formControlName="newpassword" placeholder="New password" (keypress)="keyPressNumericAlpha($event)">
+                  </mat-form-field><br>
+                  <mat-form-field class="form-field" appearance="outline">
+                      <mat-label>Confirm New Password</mat-label>
+                      <input matInput formControlName="confirmPassword" placeholder="Confirm new password" (keypress)="keyPressNumericAlpha($event)">
+                  </mat-form-field><br>
+                  <button mat-raised-button class="form-field" color="primary" (click)="changePassword()">Save</button>
+              </form>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</mat-card>
+</div>

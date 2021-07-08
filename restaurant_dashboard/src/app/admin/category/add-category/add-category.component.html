@@ -1,0 +1,17 @@
+<div>
+   
+     <h2 mat-dialog-title>Category</h2>
+   
+    <form action="" [formGroup]="categoryForm" (ngSubmit)="Category()">
+    <mat-dialog-content class="dailogcontent">
+        <mat-form-field>
+            <input matInput formControlName="category" (keypress)="keyPressAlphaNumeric($event)" placeholder="Category">
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close color="warn">Close</button>
+        <button [mat-dialog-close]="true" cdkFocusInitial type="submit" 
+         mat-raised-button color="primary" [disabled]="!categoryForm.valid">Save</button>
+    </mat-dialog-actions>
+</form>
+</div>

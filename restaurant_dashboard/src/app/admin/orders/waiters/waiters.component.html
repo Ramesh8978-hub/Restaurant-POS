@@ -1,0 +1,24 @@
+<div class="card-margin">
+  <div>
+    <div class="container-fluid">
+      <section class="team-section text-center my-0">
+        <div class="row">
+          <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+          <div class="col-lg-2 col-md-4 col-sm-4 mb-lg-0 mb-5" *ngFor="let card of data"><br>
+            <mat-card class="mat-elevation-z3 card"  [routerLink]="card.id">
+              <img class="card-img-top" [src]="Url+ '/'+card.imagepath" height="150px"> <br>
+              <mat-card-title style="font-size: medium;">{{card.username}}</mat-card-title>
+            </mat-card> <br>
+          </div>
+        </div>
+      </section>
+      <div class="image" *ngIf="total <= 0">
+        <img src="{{noData.image}}" style="height: 150px;width: 150px;">
+        <div>
+          {{noData.noDataFound}}
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+
+img{
+    width: 100px;
+    height: 80px;
+    margin-left: 30px;
+}
+table {
+  width: 100%;
+}
+mat-icon{
+font-size: 20px;
+}
+.spacer{
+  flex: 1 1 auto;
+}
+
+.add{
+  margin-left: -5px;
+  font-size: 20px;
+  }
+  .newButton{
+    margin-left: -2.1%;
+    height: 35px;
+    border-radius: 3px;
+  }
+  
+
+mat-card-title{
+  color: black;
+  }
+  mat-card-subtitle{
+    color: black;
+    }
+
+.icon{
+  color: black
+}
+span{
+  font-size: 12px;
+  font-weight: bolder;
+}
+mat-spinner{
+  margin: auto;
+}
+::ng-deep .mat-menu-content {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+.mat-menu-item{
+  line-height:38px;
+  height:38px;
+}
+      
+.image{
+  text-align: center;
+  background-color: white;
+  div{
+      text-align: center;
+      font-size: 30px;
+      color: #CACFD2;
+      font-weight: 400;
+  }
+}
+  th{
+    font-weight: bold;
+  }
+
+@import  "~bootstrap/dist/css/bootstrap.min.css";

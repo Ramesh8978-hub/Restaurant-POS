@@ -1,0 +1,36 @@
+<div>
+    <h2 mat-dialog-title>Tables</h2>
+    <form action="" [formGroup]="tablesForm" (ngSubmit)="Tables()">
+        <mat-dialog-content class="dailogcontent" >
+            <mat-form-field>
+                <mat-label>Table Number</mat-label>
+                <input matInput type="text" formControlName="tableNumber" (keypress)="keyPressNumeric($event)" placeholder="Table Number" minlength="1" maxlength="3">
+                  <mat-error *ngIf="!tablesForm.get('tableNumber').hasError('minlength')">
+                    tableNumber must be 1 numbers.
+                  </mat-error>
+            </mat-form-field><br>
+            <mat-form-field>
+                <mat-label>Seating Capacity</mat-label>
+                <input matInput type="text" formControlName="sittingCapacity" (keypress)="keyPressNumeric($event)" placeholder="Seating Capacity" minlength="1" maxlength="3">
+                <mat-error *ngIf="!tablesForm.get('sittingCapacity').hasError('maxlength')">
+                    sittingCapacity must be 3 numbers.
+                  </mat-error>
+                  <mat-error *ngIf="!tablesForm.get('sittingCapacity').hasError('minlength')">
+                    sittingCapacity atleast  1 numbers.
+                  </mat-error>
+            </mat-form-field> <br>
+            <mat-form-field *ngIf="id">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option [value]="true">Enable</mat-option>
+                    <mat-option [value]="false">Disable</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-raised-button mat-dialog-close color="warn">Close</button>
+            <button [mat-dialog-close]="true" cdkFocusInitial type="submit" mat-raised-button
+                color="primary"  [disabled]="!tablesForm.valid">Save</button>
+        </mat-dialog-actions>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+<div>
+    <h2 mat-dialog-title>FeedBack Service</h2>
+    <form action="" [formGroup]="feedbackServiceForm" (ngSubmit)="FeedbackServices()">
+    <mat-dialog-content class="dailogcontent">
+        <mat-form-field>
+            <input matInput formControlName="question" (keypress)="keyPressAlphaNumeric($event)" placeholder="Question">
+        </mat-form-field>
+    </mat-dialog-content>
+   
+    <mat-dialog-actions align="end">
+        <button mat-raised-button mat-dialog-close color="warn">Close</button>
+        <button [mat-dialog-close]="true" cdkFocusInitial type="submit" 
+         mat-raised-button color="primary"  [disabled]="!feedbackServiceForm.valid">Save</button>
+    </mat-dialog-actions>
+</form>
+</div>

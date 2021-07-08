@@ -1,0 +1,18 @@
+<div class="card-margin">
+  <div class="mat-table">
+    <div class="container-fluid">
+      <section class="team-section text-center my-0">
+        <div class="row">
+          <mat-spinner *ngIf="isLoading"></mat-spinner>
+          <div class="col-lg-2 col-md-4 col-sm-4 mb-lg-0 mb-5" *ngFor="let card of data"><br>
+            <mat-card class="mat-elevation-z0 card">
+              <img class="card-img-top" [src]="Url+ '/'+card.imagepath" alt="Image"
+                height="100px"> <br>
+              <mat-card-title style="font-size: medium;">{{card.username}}</mat-card-title>
+            </mat-card>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-drawer-container{
+  background-color:#e7e7e7;
+}
+.mat-drawer-inner-container::-webkit-scrollbar {
+    display: none;
+  }
+  *:focus {
+    outline: none !important;
+  }
+.sheetWidth{
+  width: 1500px;
+}
+
+.basic-container {
+  padding: 30px;
+}
+
+.version-info {
+  font-size: 8pt;
+  float: right;
+}
+.mat-elevation-z3{
+  box-shadow: 0rem 0rem 3rem rgba(0,0,0,0.1);
+}

@@ -1,0 +1,17 @@
+<div>
+    <h2 mat-dialog-title>Payment Mode</h2>
+    <form action="" [formGroup]="paymentsForm" (ngSubmit)="Payments()">
+        <mat-dialog-content class="dailogcontent">
+            <mat-form-field>
+                <mat-label>Payment Mode</mat-label>
+                <input matInput formControlName="paymentMode" (keypress)="keyPressAlphaNumeric($event)" placeholder="Payment Mode">
+            </mat-form-field><br>
+
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-raised-button mat-dialog-close color="warn">Close</button>
+            <button [mat-dialog-close]="true" cdkFocusInitial type="submit" 
+             mat-raised-button color="primary" [disabled]="!paymentsForm.valid">Save</button>
+        </mat-dialog-actions>
+    </form>
+</div>

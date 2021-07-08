@@ -1,0 +1,77 @@
+<div class="card-margin">
+  <div class="mat-table matTable mat-elevation-z3">
+    <mat-card class="mat-elevation-z0">
+      <mat-card-header>
+        <!-- <button mat-raised-button class="newButton" color="primary" (click)="openDialog()">
+          <mat-icon class="add">add_circle</mat-icon> Add
+        </button> -->
+
+        <span class="spacer"></span>
+
+        <label class="availible"></label>&nbsp; <span>Available</span> &nbsp;&nbsp;
+        <label class="placed"></label>&nbsp; <span>Placed</span> &nbsp;&nbsp;
+        <label class="served"></label>&nbsp; <span>Served</span> &nbsp;&nbsp;
+        <label class="booked"></label> &nbsp; <span>Booked</span> &nbsp;&nbsp;
+        <label class="not-Availible"></label>&nbsp; <span>Not-Available</span>
+
+
+      </mat-card-header>
+    </mat-card>
+    <div class="container">
+      <section class="team-section text-center my-0">
+        <div class="row">
+          <mat-progress-bar mode="buffer" *ngIf="isLoading"></mat-progress-bar>
+          <div class="col-lg-2 col-md-4 col-sm-4 mb-lg-0 mb-5" *ngFor="let table of tabledata | orderBy:'tableNumber'">
+            <br>
+            <mat-card class="mat-elevation-z0 card"
+              [style.background-color]="colorService.colors(table.tableStatus.tableStatus)">
+              <mat-card-header>
+                <span class="spacer"></span>
+                <button mat-icon-button class="icon" [matMenuTriggerFor]="menu" (click)="tableStatusDetails(table.tableStatus.tableStatus)">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                  <button mat-menu-item *ngFor="let tableStatus of tableStatusData"
+                    (click)=updateStatus(tableStatus.id,table.id,table.tableStatus.tableStatus)>
+                    {{tableStatus.tableStatus}}
+                  </button>
+                </mat-menu>
+              </mat-card-header>
+              <mat-card-title style="font-size: large;"
+                (click)="tableOrderItems(table.id,table.tableStatus.tableStatus)">
+                {{table.tableNumber}}
+              </mat-card-title>
+              <mat-card-subtitle (click)="tableOrderItems(table.id,table.tableStatus.tableStatus)">
+                Seating:{{table.sittingCapacity}}
+              </mat-card-subtitle>
+            </mat-card>
+          </div>
+        </div>
+        <div class="image" *ngIf="total <= 0">
+          <img src="{{noData.image}}" style="height:150px;width: 150px;">
+          <div>
+            {{noData.noDataFound}}
+          </div>
+        </div><br>
+      </section><br>
+    </div>
+  </div>
+</div>
+<!-- <div class="container-fluid">
+    <section class="team-section text-center my-1">
+      <div class="row">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <div class="col-lg-2 col-md-3 col-sm-6 mb-lg-0 mb-5" *ngFor="let table of tabledata | orderBy:'tableNumber' "><br>
+          <mat-card class="mat-elevation-z3 card" matRipple
+          [style.background-color]="colorService.colors(table.tableStatus.tableStatus)"
+          [routerLink]="table.id">
+            <mat-card-title style="font-size: medium;">
+              <h3>{{table.tableNumber}}</h3>
+            </mat-card-title>
+            <mat-card-subtitle>Seating : {{table.sittingCapacity}}</mat-card-subtitle>
+            <p>{{table.tableStatus.tableStatus}}</p>
+          </mat-card>
+        </div>
+      </div>
+    </section>
+  </div> -->
